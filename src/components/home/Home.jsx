@@ -11,11 +11,12 @@ import {
 /*Info*/
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { selectTodo } from "../../app/todoSlice";
 /*Components */
 import Todo from "../todo/Todo";
 
 export default function Home() {
-  const data = useSelector((state) => state.todos.todo);
+  const data = useSelector(selectTodo);
 
   const navigation = useNavigation();
 
@@ -39,25 +40,24 @@ export default function Home() {
           color: "#000000",
         }}
       >
-        ToDo List
+        Lista de Tareas:
       </Text>
-      <ScrollView
+
+      <FlatList
         style={{
           margin: 1,
           marginBottom: 15,
-          
+
           borderRadius: 15,
-          
+
           padding: 15,
-          backgroundColor:"#ffffff"
+          backgroundColor: "#ffffff",
         }}
-      >
-        <FlatList
-          data={data}
-          renderItem={({ item }) => <Todo todoInfo={item} />}
-          keyExtractor={(item) => item.id}
-        />
-      </ScrollView>
+        data={data}
+        renderItem={({ item }) => <Todo todoInfo={item} />}
+        keyExtractor={(item) => item.id}
+      />
+
       <View>
         <View style={{ margin: 20 }}>
           <Button

@@ -14,6 +14,10 @@ const Stack = createNativeStackNavigator();
 import { store } from "./src/app/store";
 import { Provider } from "react-redux";
 
+/*Persist */
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+const persistor = persistStore(store)
 
 function App() {
   return (
@@ -24,17 +28,19 @@ function App() {
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Detail" component={Detail} />
-        <Stack.Screen name="Add" component={Add}/>
-        <Stack.Screen name="Edit" component={Edit}/>
+        <Stack.Screen name="Add" component={Add} />
+        <Stack.Screen name="Edit" component={Edit} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-export default () =>{
-  return(
-    <Provider store={store}>
-      <App/>
-    </Provider>
-  )
-}
+export default () => {
+  return (
+    <PersistGate persistor={persistor}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </PersistGate>
+  );
+};

@@ -32,7 +32,6 @@ export default function Add() {
           fontSize: 25,
           fontWeight: "bold",
           margin: 10,
-
           textAlign: "center",
           color: "#000000",
         }}

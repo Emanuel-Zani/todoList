@@ -3,11 +3,12 @@ import { View, Text, Button, TextInput } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { updateTodo } from "../../app/todoSlice";
 import { useNavigation } from "@react-navigation/native";
+import { selectTodo } from "../../app/todoSlice";
 
 export default function Edit({ route }) {
   const { id, name, description } = route.params;
 
-  const data = useSelector((state) => state.todos.todo);
+  const data = useSelector(selectTodo);
 
   const dispatch = useDispatch();
 
@@ -42,29 +43,32 @@ export default function Edit({ route }) {
     >
       <Text
         style={{
-          fontSize: 40,
+          fontSize: 25,
           fontWeight: "bold",
           margin: 10,
-          marginTop: 15,
           textAlign: "center",
           color: "#000000",
         }}
       >
         Editar Tarea
       </Text>
-      <View style={{ backgroundColor: "white", borderRadius: 10, margin: 10,height:"50%" }}>
+      <View style={{ backgroundColor: "white", borderRadius: 10, margin: 5,marginTop:2 }}>
         <View
           style={{
-            padding: 2,           
+            padding: 2,
             margin: 10,
           }}
         >
-          <Text style={{
+          <Text
+            style={{
               alignItems: "flex-end",
               marginBottom: 10,
               fontSize: 25,
               fontWeight: "bold",
-            }}>Nombre de la Tarea:</Text>
+            }}
+          >
+            Nombre de la Tarea:
+          </Text>
           <TextInput
             value={todo.name}
             onChangeText={(text) => setTodo({ ...todo, name: text })}
@@ -72,24 +76,28 @@ export default function Edit({ route }) {
               backgroundColor: "white",
               borderStyle: "solid",
               borderColor: "#fca311",
-              borderWidth: 3,
+              borderWidth: 2,
               borderRadius: 5,
-              padding:10
+              padding: 4,
             }}
           />
         </View>
         <View
-          style={{         
+          style={{
             padding: 2,
             margin: 10,
           }}
         >
-          <Text style={{
+          <Text
+            style={{
               alignItems: "flex-end",
               marginBottom: 10,
               fontSize: 25,
               fontWeight: "bold",
-            }}>Descripción:</Text>
+            }}
+          >
+            Descripción:
+          </Text>
           <TextInput
             value={todo.description}
             onChangeText={(text) => setTodo({ ...todo, description: text })}
@@ -97,15 +105,15 @@ export default function Edit({ route }) {
               backgroundColor: "white",
               borderStyle: "solid",
               borderColor: "#fca311",
-              borderWidth: 3,
+              borderWidth: 2,
               borderRadius: 5,
-              padding:10
+              padding: 4,
             }}
           />
         </View>
       </View>
-      <View style={{ margin: 10,marginTop:20 }}>
-        <Button onPress={handleSubmit} title="Guardar" color="#fca311"/>
+      <View style={{ margin: 10, marginTop: 20 }}>
+        <Button onPress={handleSubmit} title="Guardar" color="#fca311" />
       </View>
     </View>
   );
